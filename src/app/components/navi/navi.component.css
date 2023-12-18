@@ -1,0 +1,18 @@
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+  background-color: #0d47a1 !important; /* Navbar arka plan rengi */
+}
+
+/* Menü linkleri rengi */
+.navbar-nav .nav-link {
+  color: #ffffff; /* Menü linkleri rengi */
+}
+
+/* Üzerine gelindiğinde menü linkleri rengi */
+.navbar-nav .nav-link:hover {
+  color: #ffffff; /* Üzerine gelindiğinde menü linkleri rengi */
+}
+
+/* Mobil cihazlarda menü açma butonu rengi */
+.navbar-toggler-icon {
+  background-color: #ffffff; /* Mobil cihazlarda menü açma butonu rengi */
+}
