@@ -1,24 +1,31 @@
 <nav
-  class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around"
+  class="navbar navbar-expand-lg d-flex justify-content-around"
   style="background-color: #0d47a1"
 >
   <a class="navbar-brand d-flex justify-content-center" href="#">
-    <img
-      src="/assets/navi/logo.png"
-      height="30"
-      class="d-inline-block align-top"
-      alt="Logo"
-    />
+    <img src="/assets/navi/logo.png" height="30" alt="Logo" />
   </a>
   <div>
-    <form class="form-inline">
+    <form
+      [formGroup]="searchForm"
+      (ngSubmit)="onSearchSubmit()"
+      class="form-inline d-flex justify-content-around"
+    >
       <input
+        formControlName="searchText"
         class="form-control"
         type="search"
         placeholder="Ara"
-        aria-label="Search"
+        style="margin-right: 5px"
       />
     </form>
+    <table
+      class="table"
+      *ngFor="let searchItem; in: searchItems"
+      style="position: absolute"
+    >
+      <td>{{ searchItem.subject }}</td>
+    </table>
   </div>
   <div>
     <ul class="navbar-nav">
