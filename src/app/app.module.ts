@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, NaviComponent, HomeComponent],
+  declarations: [AppComponent, NaviComponent, HomeComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

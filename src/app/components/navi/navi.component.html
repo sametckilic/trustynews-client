@@ -9,28 +9,33 @@
     <form
       [formGroup]="searchForm"
       (ngSubmit)="onSearchSubmit()"
-      class="form-inline d-flex justify-content-around"
+      class="form-inline"
     >
       <input
         formControlName="searchText"
         class="form-control"
         type="search"
         placeholder="Ara"
-        style="margin-right: 5px"
+        style="width: 22rem"
+        (blur)="onBlur()"
       />
+      <div *ngIf="searchItems.length > 0">
+        <div class="card" style="width: 22rem; position: absolute">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let items of searchItems">
+              <a routerLink="/news/{{ items.id }}"
+                >{{ items.subject.substring(0, 35) }}...</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </form>
-    <table
-      class="table"
-      *ngFor="let searchItem; in: searchItems"
-      style="position: absolute"
-    >
-      <td>{{ searchItem.subject }}</td>
-    </table>
   </div>
   <div>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Giriş Yap</a>
+        <a class="nav-link text-white" routerLink="/login">Giriş Yap</a>
       </li>
     </ul>
   </div>

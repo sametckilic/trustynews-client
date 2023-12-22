@@ -1,4 +1,4 @@
-import { VoteType } from './enums';
+import { VoteType } from '../enums';
 
 export interface NewsDetailsViewModel {
   id: string;

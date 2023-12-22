@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SearchNewsViewModel } from '../models/viewModels/searchNewsViewModel';
 import { Observable } from 'rxjs';
+import { LoginUserViewModel } from '../models/viewModels/loginUserViewModel';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NewsService {
+export class UserService {
   private apiUrl = 'https://localhost:5000/api/';
 
   constructor(private httpClient: HttpClient) {}
 
-  searchNews(searchText: string): Observable<SearchNewsViewModel[]> {
-    return this.httpClient.get<SearchNewsViewModel[]>(
-      this.apiUrl + 'News/Search/' + searchText
+  login(loginCredentials: any): Observable<LoginUserViewModel> {
+    return this.httpClient.post<LoginUserViewModel>(
+      this.apiUrl + 'User/Login',
+      loginCredentials
     );
   }
 }
