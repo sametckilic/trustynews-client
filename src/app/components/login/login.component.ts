@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { from } from 'rxjs';
+import { LoginUserViewModel } from 'src/app/models/viewModels/loginUserViewModel';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +11,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   form: FormGroup = this.fb.group({
-    emailAdress: ['', Validators.required],
-    passwword: ['', Validators.required],
+    emailAddress: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {}
+  loginUserViewModel: LoginUserViewModel;
+
+  constructor(private fb: FormBuilder, private userService: UserService) {}
+
+  login() {
+    this.userService.login(this.form.value).subscribe((res) => {
+      this.loginUserViewModel = res;
+      localStorage.setItem('token', 'Bearer ' + res.token);
+    });
+  }
 }
