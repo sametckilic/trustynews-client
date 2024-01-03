@@ -7,7 +7,7 @@ import { LoginUserViewModel } from '../models/viewModels/loginUserViewModel';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://localhost:5000/api/';
+  private apiUrl = 'https://localhost:5100/api/';
 
   constructor(private httpClient: HttpClient) {}
 
