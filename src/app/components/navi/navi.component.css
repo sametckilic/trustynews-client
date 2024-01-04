@@ -1,3 +1,28 @@
 * {
   text-decoration: none;
 }
+
+a {
+  color: white;
+}
+.rounded-image {
+  width: 40px; /* Resmin genişliği */
+  height: 40px; /* Resmin yüksekliği */
+  border-radius: 50%; /* Yüzde 50 border-radius, resmi yuvarlak yapar */
+  overflow: hidden; /* İçeriği sınırlıyor, dışarı taşan kısımları göstermez */
+}
+
+.rounded-image img {
+  width: 100%; /* Resmin genişliğini, yuvarlak alanın içine sığacak şekilde ayarlar */
+  height: auto; /* Oranları korumak için */
+  display: block; /* Görüntüyü blok element olarak yerleştirir */
+}
+
+.dropdownMenu {
+  border: 1px solid #0d47a1;
+  border-radius: 8px;
+  background-color: #0d47a1;
+  width: 135px;
+  position: absolute;
+  margin-top: 90px;
+}

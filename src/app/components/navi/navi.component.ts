@@ -3,7 +3,9 @@ import { SearchNewsViewModel } from 'src/app/models/viewModels/searchNewsViewMod
 import { NewsService } from 'src/app/services/news.service';
 import { FormBuilder } from '@angular/forms';
 import { timer } from 'rxjs';
-import { Token } from '@angular/compiler';
+import { UserService } from 'src/app/services/user.service';
+import { ImageService } from 'src/app/services/image.service';
+import { DecodedJwt } from 'src/app/models/decodedJwt';
 
 @Component({
   selector: 'app-navi',
@@ -14,6 +16,9 @@ export class NaviComponent implements OnInit {
   searchItems: SearchNewsViewModel[] = [];
   searchText: string = '';
   isLoggedIn: boolean = false;
+  user: DecodedJwt;
+  userImageUrl: string = '';
+  isMenuOpened: boolean = false;
 
   searchForm = this.formBuilder.nonNullable.group({
     searchText: '',
@@ -21,13 +26,29 @@ export class NaviComponent implements OnInit {
 
   constructor(
     private newsService: NewsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private imageService: ImageService
   ) {}
-  ngOnInit(): void {}
+
+  toogleMenu(): void {
+    this.isMenuOpened = !this.isMenuOpened;
+  }
+
+  setUserImage() {
+    return this.imageService.getImage(this.user.photoBase);
+  }
+
+  ngOnInit(): void {
+    this.checkUserLoggedIn();
+  }
 
   checkUserLoggedIn() {
-    if (localStorage.getItem('token') != '') {
+    if (localStorage.getItem('token')) {
       this.isLoggedIn = true;
+      this.user = this.userService.jwtDecoder();
+      this.userImageUrl = this.setUserImage();
+      console.log(this.user);
     }
   }
   onSearchSubmit(): void {
