@@ -6,6 +6,7 @@ import { timer } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ImageService } from 'src/app/services/image.service';
 import { DecodedJwt } from 'src/app/models/decodedJwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navi',
@@ -28,7 +29,8 @@ export class NaviComponent implements OnInit {
     private newsService: NewsService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private router: Router
   ) {}
 
   toogleMenu(): void {
@@ -72,5 +74,10 @@ export class NaviComponent implements OnInit {
     timer(2000).subscribe(() => {
       this.searchItems = [];
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
   }
 }

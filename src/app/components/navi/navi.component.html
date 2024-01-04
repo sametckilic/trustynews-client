@@ -42,39 +42,19 @@
     </div>
     <div *ngIf="isLoggedIn" style="width: 150px">
       <div class="text-white d-flex justify-content-around align-items-center">
-        <a routerLink="user/{{ user.id }}"> {{ user.userName }} </a>
+        <a class="username" routerLink="user/{{ user.id }}">
+          {{ user.userName }}
+        </a>
         <div class="rounded-image">
           <img class="userImage" src="{{ userImageUrl }}" alt="" />
         </div>
         <a class="dropdown-toggle" href="#" (click)="toogleMenu()"> </a>
         <div class="dropdownMenu" *ngIf="isMenuOpened">
-          <a class="dropdown-item" href="#">
-            <i
-              style="
-                background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/AgQOPcRn5zV.png');
-                background-position: 0px -532px;
-                background-size: auto;
-                width: 20px;
-                height: 20px;
-                background-repeat: no-repeat;
-                display: inline-block;
-              "
-            ></i
-            >Ayarlar</a
-          >
           <a class="dropdown-item" href="#"
-            ><i
-              style="
-                background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/RAwxFPAD5kx.png');
-                background-position: 0px -474px;
-                background-size: auto;
-                width: 20px;
-                height: 20px;
-                background-repeat: no-repeat;
-                display: inline-block;
-              "
-            ></i
-            >Çıkış Yap</a
+            ><i class="fa-solid fa-gear"></i> Ayarlar</a
+          >
+          <a (click)="logout()" class="dropdown-item" href="#"
+            ><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a
           >
         </div>
       </div>

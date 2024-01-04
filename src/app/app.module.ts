@@ -7,6 +7,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { HomeModule } from './components/home/home.module';
 
 @NgModule({
   declarations: [AppComponent, NaviComponent, HomeComponent, LoginComponent],
@@ -16,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
