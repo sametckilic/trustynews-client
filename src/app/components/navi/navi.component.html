@@ -22,8 +22,14 @@
       <div *ngIf="searchItems.length > 0">
         <div class="card" style="width: 22rem; position: absolute">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let items of searchItems">
-              <a routerLink="/news/{{ items.id }}" style="color: black"
+            <li
+              class="list-group-item"
+              style="z-index: 1"
+              *ngFor="let items of searchItems"
+            >
+              <a
+                routerLink="/news/{{ items.id }}"
+                style="color: black; z-index: 1"
                 >{{ items.subject.substring(0, 35) }}...</a
               >
             </li>

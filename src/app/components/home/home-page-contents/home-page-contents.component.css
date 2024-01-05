@@ -1,0 +1,44 @@
+.title {
+  font-weight: bold;
+  font-size: 25px;
+  color: #0d47a1;
+}
+
+.news {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.news-item {
+  width: 300px;
+}
+
+.top-sub {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  color: #5c718a;
+}
+
+.subject {
+  color: #002186;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.subject a {
+  text-decoration: none;
+}
+
+.subject:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.top-sub span {
+  cursor: pointer;
+}

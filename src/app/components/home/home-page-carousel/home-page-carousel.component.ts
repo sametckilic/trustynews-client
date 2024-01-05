@@ -62,8 +62,30 @@ export class HomePageCarouselComponent implements OnInit, OnDestroy {
     return title;
   }
 
-  getCurrentSlideTime() {
-    var time = this.slides[this.currentIndex].createDate;
-    console.log(time);
+  findDifferenceFromDate(givenDate: Date): string {
+    const givenDateTime = new Date(givenDate);
+    const currentDate = new Date();
+
+    const differenceInMilliseconds =
+      currentDate.getTime() - givenDateTime.getTime();
+    const differenceInSeconds = differenceInMilliseconds / 1000;
+    const differenceInMinutes = differenceInSeconds / 60;
+    const differenceInHours = differenceInMinutes / 60;
+    const differenceInDays = differenceInHours / 24;
+
+    if (differenceInDays >= 1) {
+      return `${Math.floor(differenceInDays)} gün önce.`;
+    } else if (differenceInHours >= 1) {
+      return `${Math.floor(differenceInHours)} saat önce.`;
+    } else if (differenceInMinutes >= 1) {
+      return `${Math.floor(differenceInMinutes)} dakika önce.`;
+    } else {
+      return 'Az önce!';
+    }
+  }
+
+  getCurrentSlideTime(): string {
+    const time = this.slides[this.currentIndex].createdDate;
+    return this.findDifferenceFromDate(time);
   }
 }

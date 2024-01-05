@@ -1,0 +1,25 @@
+<hr color="#0d47a1" />
+<div class="container">
+  <div class="title">Son Haberler</div>
+  <div class="news">
+    <div class="news-item" *ngFor="let new of news">
+      <div class="top-sub">
+        <span class="date">
+          {{ new.date }}
+        </span>
+        <span>
+          {{ new.bookmarkedCount }}
+          <span (click)="clickBookmark()" *ngIf="new.isBookmarked">
+            <i class="fa-solid fa-bookmark"></i>
+          </span>
+          <span (click)="clickBookmark()" *ngIf="!new.isBookmarked">
+            <i class="fa-regular fa-bookmark"></i>
+          </span>
+        </span>
+      </div>
+      <div class="subject">
+        <a href="news/{{ new.id }}">{{ new.subject }}</a>
+      </div>
+    </div>
+  </div>
+</div>
