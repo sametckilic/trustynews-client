@@ -4,14 +4,8 @@
     <div (click)="goToNext()" class="rightArrow">❱</div>
   </div>
   <img class="slide" src="{{ getCurrentSlideUrl() }}" alt="" />
-
-  <div class="dotsContainer">
-    <div
-      *ngFor="let slide of slides; let slideIndex = index"
-      class="dot"
-      (click)="goToSlide(slideIndex)"
-    >
-      ●
-    </div>
+  <div class="title">
+    <a href="">{{ getCurrentSlideTitle() }}</a>
+    <div class="title">{{ getCurrentSlideTime() }}</div>
   </div>
 </div>

@@ -25,7 +25,7 @@ export class HomePageCarouselComponent implements OnInit, OnDestroy {
     if (this.timeoutId) {
       window.clearTimeout(this.timeoutId);
     }
-    this.timeoutId = window.setTimeout(() => this.goToNext(), 30000);
+    this.timeoutId = window.setTimeout(() => this.goToNext(), 7500);
   }
 
   goToPrevious(): void {
@@ -55,5 +55,15 @@ export class HomePageCarouselComponent implements OnInit, OnDestroy {
       this.slides[this.currentIndex].newsCoverPhotoBase
     );
     return url;
+  }
+
+  getCurrentSlideTitle() {
+    var title = this.slides[this.currentIndex].subject;
+    return title;
+  }
+
+  getCurrentSlideTime() {
+    var time = this.slides[this.currentIndex].createDate;
+    console.log(time);
   }
 }

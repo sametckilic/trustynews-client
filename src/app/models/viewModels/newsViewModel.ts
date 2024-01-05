@@ -3,4 +3,5 @@ export interface NewsViewModel {
   subject: string;
   newsCoverPhotoBase: string;
   voteCount: number;
+  createDate: Date;
 }

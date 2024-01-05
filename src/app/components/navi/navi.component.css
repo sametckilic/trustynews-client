@@ -25,6 +25,7 @@ a {
   width: 135px;
   position: absolute;
   margin-top: 120px;
+  z-index: 1000;
 }
 
 .dropdown-toggle {
