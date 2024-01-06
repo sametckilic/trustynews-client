@@ -18,7 +18,22 @@ export class NewsService {
     );
   }
 
-  getNews(count: number, todaysNews: boolean): Observable<NewsViewModel[]> {
+  getNews(
+    count: number,
+    todaysNews: boolean,
+    userId?: string
+  ): Observable<NewsViewModel[]> {
+    if (userId != null) {
+      return this.httpClient.get<NewsViewModel[]>(
+        this.apiUrl +
+          'News?Count=' +
+          count +
+          '&TodaysNews=' +
+          todaysNews +
+          '&UserId=' +
+          userId
+      );
+    }
     return this.httpClient.get<NewsViewModel[]>(
       this.apiUrl + 'News?Count=' + count + '&TodaysNews=' + todaysNews
     );

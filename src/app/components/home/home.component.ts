@@ -17,9 +17,8 @@ export class HomeComponent implements OnInit {
   slides: NewsViewModel[] = [];
 
   getNews() {
-    return this.newsService.getNews(4, false).subscribe((res) => {
+    return this.newsService.getNews(5, false).subscribe((res) => {
       this.slides = res;
-      console.log(this.slides);
     });
   }
 }

@@ -50,7 +50,6 @@ export class NaviComponent implements OnInit {
       this.isLoggedIn = true;
       this.user = this.userService.jwtDecoder();
       this.userImageUrl = this.setUserImage();
-      console.log(this.user);
     }
   }
   onSearchSubmit(): void {

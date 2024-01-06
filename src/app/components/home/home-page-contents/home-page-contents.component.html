@@ -1,6 +1,6 @@
 <hr color="#0d47a1" />
 <div class="container">
-  <div class="title">Son Haberler</div>
+  <div class="title">Bugünün Haberleri</div>
   <div class="news">
     <div class="news-item" *ngFor="let new of news">
       <div class="top-sub">
@@ -9,10 +9,13 @@
         </span>
         <span>
           {{ new.bookmarkedCount }}
-          <span (click)="clickBookmark()" *ngIf="new.isBookmarked">
+          <span (click)="clickBookmark(true, new.id)" *ngIf="new.isBookmarked">
             <i class="fa-solid fa-bookmark"></i>
           </span>
-          <span (click)="clickBookmark()" *ngIf="!new.isBookmarked">
+          <span
+            (click)="clickBookmark(false, new.id)"
+            *ngIf="!new.isBookmarked"
+          >
             <i class="fa-regular fa-bookmark"></i>
           </span>
         </span>

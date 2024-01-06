@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NewsViewModel } from 'src/app/models/viewModels/newsViewModel';
 import { NewsService } from 'src/app/services/news.service';
 import { News } from './types/news';
+import { jwtDecode } from 'jwt-decode';
+import { UserService } from 'src/app/services/user.service';
+import { DecodedJwt } from 'src/app/models/decodedJwt';
+import { BookmarkService } from 'src/app/services/bookmark.service';
 
 @Component({
   selector: 'app-home-page-contents',
@@ -12,14 +16,26 @@ export class HomePageContentsComponent implements OnInit {
   newsViewModel: NewsViewModel[] = [];
   newsImage: string = '';
   news: News[] = [];
+  user: DecodedJwt = this.userService.jwtDecoder();
+  currentNewsIndex: number = -1;
 
-  constructor(private newsService: NewsService) {}
+  constructor(
+    private newsService: NewsService,
+    private userService: UserService,
+    private bookmarkService: BookmarkService
+  ) {}
   ngOnInit(): void {
     this.getNews();
   }
 
   getNews() {
-    this.newsService.getNews(3, true).subscribe((res) => {
+    if (this.user == null) {
+      this.newsService.getNews(3, true).subscribe((res) => {
+        this.newsViewModel = res;
+        this.setNews();
+      });
+    }
+    this.newsService.getNews(3, true, this.user.id).subscribe((res) => {
       this.newsViewModel = res;
       this.setNews();
     });
@@ -36,10 +52,35 @@ export class HomePageContentsComponent implements OnInit {
       };
       this.news.push(haber);
     });
-    console.log(this.news);
   }
-  clickBookmark() {
-    console.log('berkant');
+  clickBookmark(isBookmarked: boolean, id: string) {
+    if (this.user != null) {
+      if (isBookmarked) {
+        this.bookmarkService
+          .deleteBookmark(this.user.id, id)
+          .subscribe((res) => {
+            if (res == true) {
+              this.news.forEach((val) => {
+                if (val.id == id) {
+                  val.isBookmarked = false;
+                  val.bookmarkedCount--;
+                }
+              });
+            }
+          });
+      } else {
+        this.bookmarkService
+          .createBookmark(this.user.id, id)
+          .subscribe((res) => {
+            this.news.forEach((val) => {
+              if (val.id == id) {
+                val.isBookmarked = true;
+                val.bookmarkedCount++;
+              }
+            });
+          });
+      }
+    }
   }
 
   findDifferenceFromDate(givenDate: Date): string {
