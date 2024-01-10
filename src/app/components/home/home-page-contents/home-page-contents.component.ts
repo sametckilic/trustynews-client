@@ -30,12 +30,12 @@ export class HomePageContentsComponent implements OnInit {
 
   getNews() {
     if (this.user == null) {
-      this.newsService.getNews(3, true).subscribe((res) => {
+      this.newsService.getNews(3, false).subscribe((res) => {
         this.newsViewModel = res;
         this.setNews();
       });
     }
-    this.newsService.getNews(3, true, this.user.id).subscribe((res) => {
+    this.newsService.getNews(3, false, this.user.id).subscribe((res) => {
       this.newsViewModel = res;
       this.setNews();
     });

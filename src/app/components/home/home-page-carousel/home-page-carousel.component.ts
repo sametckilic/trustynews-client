@@ -74,11 +74,11 @@ export class HomePageCarouselComponent implements OnInit, OnDestroy {
     const differenceInDays = differenceInHours / 24;
 
     if (differenceInDays >= 1) {
-      return `${Math.floor(differenceInDays)} gün önce.`;
+      return `${Math.floor(differenceInDays)} gün önce`;
     } else if (differenceInHours >= 1) {
-      return `${Math.floor(differenceInHours)} saat önce.`;
+      return `${Math.floor(differenceInHours)} saat önce`;
     } else if (differenceInMinutes >= 1) {
-      return `${Math.floor(differenceInMinutes)} dakika önce.`;
+      return `${Math.floor(differenceInMinutes)} dakika önce`;
     } else {
       return 'Az önce!';
     }

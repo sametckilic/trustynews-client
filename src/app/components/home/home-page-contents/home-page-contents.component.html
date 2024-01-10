@@ -1,7 +1,7 @@
 <hr color="#0d47a1" />
 <div class="container">
   <div class="title">Bugünün Haberleri</div>
-  <div class="news">
+  <div class="news" *ngIf="news != null">
     <div class="news-item" *ngFor="let new of news">
       <div class="top-sub">
         <span class="date">
@@ -25,4 +25,9 @@
       </div>
     </div>
   </div>
+  <div class="dont-have-news" *ngIf="news == null">
+    <span>Bugün hiç yeni haber yok.</span>
+  </div>
+  <br />
 </div>
+<hr />

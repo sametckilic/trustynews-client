@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="header">
+    <div class="title">Haberler</div>
+    <div class="arrows">
+      <i
+        *ngIf="prevActive"
+        (click)="prevPage()"
+        class="fa-solid fa-arrow-left-long arrow-item fa-2xl"
+      ></i>
+      <div *ngIf="!prevActive" style="width: 32px"></div>
+      <span>
+        {{ currentPage }}
+      </span>
+      <i
+        *ngIf="nextActive"
+        (click)="nextPage()"
+        class="fa-solid fa-arrow-right-long arrow-item fa-2xl"
+      ></i>
+      <span *ngIf="!nextActive" style="width: 32px; color: white">XXXXXII</span>
+    </div>
+  </div>
+  <div class="news">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let new of news">
+        <div class="card mb-4">
+          <img
+            [src]="getImageUrl(new.newsCoverPhotoBase)"
+            class="card-img-top"
+            alt="Haber Resmi"
+          />
+          <div class="card-body">
+            <h5 class="card-title" style="height: 48px">{{ new.subject }}</h5>
+            <p class="card-subtitle mt-3 mb-2" style="color: #5c718a">
+              {{ new.content.substring(0, 90) }}...
+            </p>
+            <p class="card-text" style="color: #5c718a">
+              {{ findDifferenceFromDate(new.createdDate) }}
+            </p>
+            <p class="card-text" style="color: #5c718a">
+              {{ new.createdByUserName }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

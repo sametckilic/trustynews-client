@@ -42,3 +42,15 @@
 .top-sub span {
   cursor: pointer;
 }
+
+.dont-have-news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dont-have-news span {
+  color: #002186;
+  font-weight: bold;
+  font-size: 35px;
+}

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { SearchNewsViewModel } from '../models/viewModels/searchNewsViewModel';
 import { Observable } from 'rxjs';
 import { NewsViewModel } from '../models/viewModels/newsViewModel';
+import { NewsDetailsViewModel } from '../models/viewModels/newsDetailViewModel';
+import { PageInfo } from '../components/home/home-page-news/types/pageInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +38,18 @@ export class NewsService {
     }
     return this.httpClient.get<NewsViewModel[]>(
       this.apiUrl + 'News?Count=' + count + '&TodaysNews=' + todaysNews
+    );
+  }
+
+  getMainPage(
+    page: number,
+    pageSize: number
+  ): Observable<{ results: NewsDetailsViewModel[]; pageInfo: PageInfo }> {
+    return this.httpClient.get<{
+      results: NewsDetailsViewModel[];
+      pageInfo: PageInfo;
+    }>(
+      this.apiUrl + 'News/MainPageNews?Page=' + page + '&pageSize=' + pageSize
     );
   }
 }
