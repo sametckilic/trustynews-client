@@ -9,5 +9,7 @@ export interface NewsDetailsViewModel {
   newsCoverPhotoBase: string;
   isBookmarked: boolean;
   bookmarkedCount: number;
+  userPhotoBase: string;
+  createdById: string;
   voteType: VoteType;
 }

@@ -43,13 +43,25 @@ export class NewsService {
 
   getMainPage(
     page: number,
-    pageSize: number
-  ): Observable<{ results: NewsDetailsViewModel[]; pageInfo: PageInfo }> {
+    pageSize: number,
+    userId?: string
+  ): Observable<{
+    results: NewsDetailsViewModel[];
+    pageInfo: PageInfo;
+    userId?: string;
+  }> {
     return this.httpClient.get<{
       results: NewsDetailsViewModel[];
       pageInfo: PageInfo;
     }>(
-      this.apiUrl + 'News/MainPageNews?Page=' + page + '&pageSize=' + pageSize
+      this.apiUrl +
+        'News/MainPageNews?' +
+        'UserId=' +
+        userId +
+        '&Page=' +
+        page +
+        '&pageSize=' +
+        pageSize
     );
   }
 }

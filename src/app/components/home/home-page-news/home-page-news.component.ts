@@ -3,6 +3,9 @@ import { NewsDetailsViewModel } from 'src/app/models/viewModels/newsDetailViewMo
 import { NewsService } from 'src/app/services/news.service';
 import { PageInfo } from './types/pageInfo';
 import { ImageService } from 'src/app/services/image.service';
+import { BookmarkService } from 'src/app/services/bookmark.service';
+import { UserService } from 'src/app/services/user.service';
+import { DecodedJwt } from 'src/app/models/decodedJwt';
 
 @Component({
   selector: 'app-home-page-news',
@@ -16,22 +19,41 @@ export class HomePageNewsComponent implements OnInit {
   maxPageNumber: number = 0;
   nextActive: boolean = true;
   prevActive: boolean = false;
+  user: DecodedJwt = this.userService.jwtDecoder();
 
   constructor(
     private newsService: NewsService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private bookmarkService: BookmarkService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.getMainPageNews();
   }
 
+  getUserImage(photoBase: string) {
+    return this.imageService.getImage(photoBase);
+  }
+
   getMainPageNews() {
-    this.newsService.getMainPage(this.currentPage, 6).subscribe((data) => {
-      this.news = data.results;
-      this.pageInfo = data.pageInfo;
-      this.maxPageNumber = this.pageInfo.totalPageCount;
-    });
+    if (this.user != null) {
+      this.newsService
+        .getMainPage(this.currentPage, 6, this.user.id)
+        .subscribe((data) => {
+          console.log(this.user.id);
+          this.news = data.results;
+          this.pageInfo = data.pageInfo;
+          this.maxPageNumber = this.pageInfo.totalPageCount;
+          console.log(data.results);
+        });
+    } else {
+      this.newsService.getMainPage(this.currentPage, 6).subscribe((data) => {
+        this.news = data.results;
+        this.pageInfo = data.pageInfo;
+        this.maxPageNumber = this.pageInfo.totalPageCount;
+      });
+    }
   }
 
   nextPage() {
@@ -89,5 +111,35 @@ export class HomePageNewsComponent implements OnInit {
   getImageUrl(imageUrl: string) {
     var url = this.imageService.getImage(imageUrl);
     return url;
+  }
+
+  clickBookmark(isBookmarked: boolean, id: string) {
+    if (this.user != null) {
+      if (isBookmarked) {
+        this.bookmarkService
+          .deleteBookmark(this.user.id, id)
+          .subscribe((res) => {
+            if (res == true) {
+              this.news.forEach((val) => {
+                if (val.id == id) {
+                  val.isBookmarked = false;
+                  val.bookmarkedCount--;
+                }
+              });
+            }
+          });
+      } else {
+        this.bookmarkService
+          .createBookmark(this.user.id, id)
+          .subscribe((res) => {
+            this.news.forEach((val) => {
+              if (val.id == id) {
+                val.isBookmarked = true;
+                val.bookmarkedCount++;
+              }
+            });
+          });
+      }
+    }
   }
 }

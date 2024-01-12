@@ -64,3 +64,42 @@
 .card-text {
   font-size: 14px;
 }
+
+a {
+  text-decoration: none;
+}
+
+.card-body a h5:hover {
+  text-decoration: underline;
+}
+
+.date-username {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rounded-image {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.rounded-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookmark-vote-section {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
