@@ -6,6 +6,8 @@ import { ImageService } from 'src/app/services/image.service';
 import { BookmarkService } from 'src/app/services/bookmark.service';
 import { UserService } from 'src/app/services/user.service';
 import { DecodedJwt } from 'src/app/models/decodedJwt';
+import { VoteType } from 'src/app/models/enums';
+import { VoteService } from 'src/app/services/vote.service';
 
 @Component({
   selector: 'app-home-page-news',
@@ -25,7 +27,8 @@ export class HomePageNewsComponent implements OnInit {
     private newsService: NewsService,
     private imageService: ImageService,
     private bookmarkService: BookmarkService,
-    private userService: UserService
+    private userService: UserService,
+    private voteService: VoteService
   ) {}
 
   ngOnInit(): void {
@@ -41,11 +44,9 @@ export class HomePageNewsComponent implements OnInit {
       this.newsService
         .getMainPage(this.currentPage, 6, this.user.id)
         .subscribe((data) => {
-          console.log(this.user.id);
           this.news = data.results;
           this.pageInfo = data.pageInfo;
           this.maxPageNumber = this.pageInfo.totalPageCount;
-          console.log(data.results);
         });
     } else {
       this.newsService.getMainPage(this.currentPage, 6).subscribe((data) => {
@@ -141,5 +142,54 @@ export class HomePageNewsComponent implements OnInit {
           });
       }
     }
+  }
+
+  createVote(newsId: string, createdById: string, voteType: VoteType) {
+    this.voteService
+      .createVote(newsId, createdById, voteType)
+      .subscribe((res) => {
+        if (res == true) {
+          this.news.map((obj) => {
+            if (obj.id == newsId) {
+              obj.voteType = voteType;
+            }
+          });
+        }
+      });
+  }
+
+  deleteVote(newsId: string, createdById: string) {
+    this.voteService.deleteVote(newsId, createdById).subscribe((res) => {
+      if (res == true) {
+        this.news.map((obj) => {
+          if (obj.id == newsId) {
+            obj.voteType == VoteType.None;
+            console.log(obj);
+          }
+        });
+      }
+    });
+  }
+
+  clickVote(newsId: string, voteType: VoteType) {
+    var clickedNews = this.news.find((obj) => obj.id == newsId);
+
+    if (voteType == clickedNews?.voteType) {
+      this.deleteVote(newsId, this.user.id);
+    } else {
+      this.createVote(newsId, this.user.id, voteType);
+    }
+  }
+
+  getVoteColor(voteType: VoteType, votedType: VoteType) {
+    if (voteType == 0 && votedType == 0) {
+      return 'red';
+    }
+
+    if (voteType == 1 && votedType == 1) {
+      return 'green';
+    }
+
+    return 'black';
   }
 }

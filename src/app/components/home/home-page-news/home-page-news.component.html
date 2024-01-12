@@ -38,23 +38,6 @@
                 {{ new.content.substring(0, 90) }}...
               </p>
             </a>
-            <span class="date-username">
-              <div class="card-text" style="color: #5c718a">
-                {{ findDifferenceFromDate(new.createdDate) }}
-              </div>
-              <div class="card-text user">
-                <div class="rounded-image">
-                  <img
-                    class="userImage"
-                    src="{{ getUserImage(new.userPhotoBase) }}"
-                    alt=""
-                  />
-                </div>
-                <a href="user/{{ new.createdById }}">
-                  {{ new.createdByUserName }}
-                </a>
-              </div>
-            </span>
             <div class="bookmark-vote-section">
               <div class="bookmark">
                 <span>
@@ -74,14 +57,44 @@
                 {{ new.bookmarkedCount }}
               </div>
               <div class="vote-type">
-                <span class="up-vote">
-                  <i class="fa-solid fa-angle-up"></i>
+                <span
+                  class="up-vote single-vote"
+                  (click)="clickVote(new.id, 1)"
+                >
+                  <i
+                    class="fa-solid fa-angle-up fa-xl"
+                    [ngStyle]="{ color: getVoteColor(1, new.voteType) }"
+                  ></i>
                 </span>
-                <span class="down-vote">
-                  <i class="fa-solid fa-angle-down"></i>
+                <span
+                  class="down-vote single-vote"
+                  (click)="clickVote(new.id, 0)"
+                >
+                  <i
+                    class="fa-solid fa-angle-down fa-xl"
+                    [ngStyle]="{ color: getVoteColor(0, new.voteType) }"
+                  ></i>
                 </span>
               </div>
             </div>
+            <span class="date-username">
+              <div class="card-text" style="color: #5c718a">
+                {{ findDifferenceFromDate(new.createdDate) }}
+              </div>
+
+              <div class="card-text user">
+                <div class="rounded-image">
+                  <img
+                    class="userImage"
+                    src="{{ getUserImage(new.userPhotoBase) }}"
+                    alt=""
+                  />
+                </div>
+                <a href="user/{{ new.createdById }}">
+                  {{ new.createdByUserName }}
+                </a>
+              </div>
+            </span>
           </div>
         </div>
       </div>

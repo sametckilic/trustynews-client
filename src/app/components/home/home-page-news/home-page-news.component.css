@@ -102,4 +102,9 @@ a {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  margin: 4px 0;
+}
+
+.single-vote {
+  margin: 0 10px;
 }
