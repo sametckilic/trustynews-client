@@ -28,6 +28,7 @@ export class LoginComponent {
       this.loginUserViewModel = res;
       localStorage.setItem('token', 'Bearer ' + res.token);
       this.router.navigate(['']);
+      window.location.reload();
     });
   }
 }

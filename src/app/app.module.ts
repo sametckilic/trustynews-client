@@ -8,9 +8,17 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HomeModule } from './components/home/home.module';
+import { FooterComponent } from './components/footer/footer.component';
+import { SingleNewsModule } from './components/single-news/single-news.module';
 
 @NgModule({
-  declarations: [AppComponent, NaviComponent, HomeComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    NaviComponent,
+    HomeComponent,
+    LoginComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +26,7 @@ import { HomeModule } from './components/home/home.module';
     FormsModule,
     ReactiveFormsModule,
     HomeModule,
+    SingleNewsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

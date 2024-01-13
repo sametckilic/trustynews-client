@@ -1,4 +1,4 @@
-import { BootstrapOptions, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewsDetailsViewModel } from 'src/app/models/viewModels/newsDetailViewModel';
 import { NewsService } from 'src/app/services/news.service';
 import { PageInfo } from './types/pageInfo';
@@ -163,8 +163,8 @@ export class HomePageNewsComponent implements OnInit {
       if (res == true) {
         this.news.map((obj) => {
           if (obj.id == newsId) {
-            obj.voteType == VoteType.None;
-            console.log(obj);
+            var votedType = VoteType.None;
+            obj.voteType = votedType;
           }
         });
       }
