@@ -1,1 +1,72 @@
-<p>single-news works!</p>
+<div class="content">
+  <div class="header d-flex flex-column">
+    <div class="title-section">
+      <h1 class="title">{{ news.subject }}</h1>
+    </div>
+    <div
+      class="user d-flex flex-row justify-content-between align-items-center"
+    >
+      <div class="user-section d-flex flex-row">
+        <div class="rounded-image">
+          <img
+            class="userImage"
+            src="{{ getImage(news.userPhotoBase) }}"
+            alt=""
+          />
+        </div>
+        <a
+          href="user/{{ news.createdById }}"
+          style="color: #0d47a1; font-weight: bold"
+        >
+          {{ news.createdByUserName }}
+        </a>
+      </div>
+
+      <div class="bookmark-section">
+        <div class="bookmark">
+          <span>
+            <span
+              (click)="clickBookmark(true, news.id)"
+              *ngIf="news.isBookmarked"
+            >
+              <i class="fa-solid fa-bookmark"></i>
+            </span>
+            <span
+              (click)="clickBookmark(false, news.id)"
+              *ngIf="!news.isBookmarked"
+            >
+              <i class="fa-regular fa-bookmark"></i>
+            </span>
+          </span>
+          {{ news.bookmarkedCount }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="time-section mt-2 d-flex flex-row justify-content-between align-items-center"
+    >
+      <div class="time">
+        <span style="color: grey; font-size: 1rem">{{
+          findDifferenceFromDate(news.createdDate)
+        }}</span>
+      </div>
+      <div class="vote-section">
+        <div class="vote-type">
+          <span class="up-vote single-vote" (click)="clickVote(news.id, 1)">
+            <i
+              class="fa-solid fa-angle-up fa-xl"
+              [ngStyle]="{ color: getVoteColor(1, news.voteType) }"
+            ></i>
+          </span>
+          <span class="down-vote single-vote" (click)="clickVote(news.id, 0)">
+            <i
+              class="fa-solid fa-angle-down fa-xl"
+              [ngStyle]="{ color: getVoteColor(0, news.voteType) }"
+            ></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <app-home-page-contents></app-home-page-contents> -->
+</div>

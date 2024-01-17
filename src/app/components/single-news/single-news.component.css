@@ -1,0 +1,38 @@
+.content {
+  margin: 0 245px;
+}
+
+.header {
+  padding: 30px 110px;
+}
+
+.title {
+  font-weight: 600;
+  color: #002186;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.rounded-image {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.rounded-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.vote-section span {
+  font-size: 27px;
+}

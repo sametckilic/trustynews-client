@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { NewsViewModel } from '../models/viewModels/newsViewModel';
 import { NewsDetailsViewModel } from '../models/viewModels/newsDetailViewModel';
 import { PageInfo } from '../components/home/home-page-news/types/pageInfo';
+import { News } from '../components/home/home-page-contents/types/news';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +63,15 @@ export class NewsService {
         page +
         '&pageSize=' +
         pageSize
+    );
+  }
+
+  getSingleNews(
+    newsId: string,
+    userId?: string
+  ): Observable<NewsDetailsViewModel> {
+    return this.httpClient.get<NewsDetailsViewModel>(
+      this.apiUrl + 'News/GetSingleNews/' + newsId + '?userId=' + userId
     );
   }
 }

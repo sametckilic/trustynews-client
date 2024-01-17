@@ -7,3 +7,8 @@
 body {
   background-color: #44a4f2;
 }
+
+.container-1 {
+  width: 1600px;
+  margin: 0 auto;
+}

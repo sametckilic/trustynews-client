@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-lg-4" *ngFor="let new of news">
         <div class="card mb-4">
-          <a href="">
+          <a href="/news/{{ new.id }}">
             <img
               [src]="getImageUrl(new.newsCoverPhotoBase)"
               class="card-img-top"
@@ -32,7 +32,7 @@
           </a>
 
           <div class="card-body">
-            <a href="">
+            <a href="/news/{{ new.id }}">
               <h5 class="card-title" style="height: 48px">{{ new.subject }}</h5>
               <p class="card-subtitle mt-3 mb-2" style="color: #5c718a">
                 {{ new.content.substring(0, 90) }}...
